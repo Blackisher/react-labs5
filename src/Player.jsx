@@ -6,8 +6,8 @@ function Player(props) {
             Player {props.playerNumber} component <br/>
             Name: {props.playerName} <br/>
             Played number of times: {props.playedNumberOftimes} <br/>
-            <button>
-                {props.buttonText}
+            <button name={props.playerNumber} onClick={props.onClickButtonHandler} disabled={props.playerStatus === 1}>
+                {props.playerStatus === 1 ? 'This user is playing now' : 'Play' }
             </button>
         </div>
     );

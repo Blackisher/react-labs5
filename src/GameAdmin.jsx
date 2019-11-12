@@ -8,9 +8,11 @@ class GameAdmin extends Component{
     constructor(props) {
         super(props);
         this.state = { user1Name: 'Jan',
-                        user2Name: 'Anna'}
+                        user2Name: 'Anna',
+                        activePlayer: [1,0]} //1 user is playing, 0 user is not playing
         this.player1NameHandler = this.player1NameHandler.bind(this);
         this.player2NameHandler = this.player2NameHandler.bind(this);
+        this.playerClickButtonHandler = this.playerClickButtonHandler.bind(this);
     }
 
     player1NameHandler(e){
@@ -25,12 +27,26 @@ class GameAdmin extends Component{
         })
     }
 
+    playerClickButtonHandler(e){
+        var whoClicked = e.target.name;
+        if (whoClicked === 'One') {
+            this.setState((prevState, props) => ({
+                activePlayer: [1,0]
+            }))
+        } else if (whoClicked === 'Two') {
+            this.setState((prevState, props) => ({
+                activePlayer: [0,1]
+            }))
+        }
+
+    }
+
     render() {
         return (
             <div style={{ backgroundColor:'green' }}>
                 I’m Admin component
-                <Player playerNumber='One' playerName={this.state.user1Name} buttonText='Play' playedNumberOftimes='5'/>
-                <Player playerNumber='Two' playerName={this.state.user2Name} buttonText='This user is playing now' playedNumberOftimes='6'/>
+                <Player playerNumber='One' playerName={this.state.user1Name} playerStatus={this.state.activePlayer[0]} playedNumberOftimes='5' onClickButtonHandler={this.playerClickButtonHandler}/>
+                <Player playerNumber='Two' playerName={this.state.user2Name} playerStatus={this.state.activePlayer[1]} playedNumberOftimes='6' onClickButtonHandler={this.playerClickButtonHandler}/>
                 <hr/>
                 <InputPanel playerOneName={this.state.user1Name}  playerOneNameHandler={this.player1NameHandler}
                             playerTwoName={this.state.user2Name} playerTwoNameHandler={this.player2NameHandler}
