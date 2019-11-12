@@ -9,6 +9,12 @@ class GameAdmin extends Component{
         super(props);
         this.state = { user1Name: 'Jan',
                         user2Name: 'Anna',
+                        /* If ("...Only one button in Player components can be active. ...") could be omitted I would set
+                        numberOfTimesPlayerPlayed: [0,0],
+                        activePlayer: [0,0]
+                        but as I am not certain...
+                        leaving with numberOfTimesPlayerPlayed: [1,0], as player one is already playing.
+                        */
                         numberOfTimesPlayerPlayed: [1,0],
                         activePlayer: [1,0]} //1 user is playing, 0 user is not playing
         this.player1NameHandler = this.player1NameHandler.bind(this);
